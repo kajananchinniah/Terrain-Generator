@@ -19,7 +19,6 @@ Window::Window()
     instance->first_mouse = true;
     instance->delta_time = 0.0f;
     instance->last_frame = 0.0f; 
-    shader = Shader("../shaders/vertex.vs", "../shaders/fragment.fs");
 }
 
 int Window::init()
