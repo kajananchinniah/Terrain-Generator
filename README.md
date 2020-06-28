@@ -11,7 +11,8 @@ Simply clone the repository, with any dependencies, and compile it using: `g++ s
 ## Acknowledgements / References 
 To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). 
 
-To learn about terrain generation, I consulted two resources:
-- https://www.youtube.com/watch?v=64NblGkAabk
-- https://www.youtube.com/watch?v=wbpMiKiSKm8
-- https://www.redblobgames.com/maps/terrain-from-noise/
+To learn about terrain generation, I consulted three resources:
+- https://www.youtube.com/watch?v=64NblGkAabk 
+    - I heavily based my terrain.cpp methods on the implementation found here
+- https://www.redblobgames.com/maps/terrain-from-noise
+-   - This outlined basically everything I needed to know 
