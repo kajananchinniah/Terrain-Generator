@@ -3,6 +3,7 @@ This is a terrain generator implemented in C++ using OpenGL.
 
 ## Installing
 TODO
+Note: I include some libraries that I didn't write in the include (this is bad practice but I did it anyways). 
 
 ## Getting started 
 Simply clone the repository, with any dependencies, and compile it using: `g++ src/main.cpp src/glad.c src/window.cpp -I include/ -I include/glm/ -lglfw -ldl`. I plan on adding a makefile later on.
@@ -13,3 +14,4 @@ To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the
 To learn about terrain generation, I consulted two resources:
 - https://www.youtube.com/watch?v=64NblGkAabk
 - https://www.youtube.com/watch?v=wbpMiKiSKm8
+- https://www.redblobgames.com/maps/terrain-from-noise/
