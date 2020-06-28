@@ -44,6 +44,8 @@ class Window
         float last_x;
         float last_y;
         bool first_mouse;
+        float camera_near;
+        float camera_far;
 
         // Timing 
         float delta_time;

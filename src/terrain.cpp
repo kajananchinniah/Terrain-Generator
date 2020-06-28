@@ -8,8 +8,10 @@ void Terrain::generate()
         {
             float x_ = (float)(x - grid_size_x/2) / grid_size_x;
             float z_ = (float)(z - grid_size_z/2) / grid_size_z;
+            float y_ = 0;
+
             vertices.push_back(x_);
-            vertices.push_back(0);
+            vertices.push_back(y_);
             vertices.push_back(z_);
         }
         

@@ -18,12 +18,14 @@ Window::Window()
 
 int Window::init()
 {
-    instance->camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    instance->camera = Camera(glm::vec3(0.0f, 1.0f, 0.0f));
     instance->last_x = WINDOW_WIDTH / 2.0f;
     instance->last_y = WINDOW_HEIGHT / 2.0f;
     instance->first_mouse = true;
     instance->delta_time = 0.0f;
     instance->last_frame = 0.0f;
+    instance->camera_near = 0.1f;
+    instance->camera_far = 100.0f; //TODO :update these values 
 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -88,12 +90,26 @@ void Window::setupRender()
 
 void Window::render()
 {
+    float current_frame = glfwGetTime();
+    delta_time = current_frame - last_frame;
+    last_frame = current_frame; 
+
     processInput(window);
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     shader_ptr->use();
+
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);
+    shader_ptr->setMat4("projection", projection);
+
+    glm::mat4 view = camera.GetViewMatrix();
+    shader_ptr->setMat4("view", view);
+
+    glm::mat4 model = glm::mat4(1.0f);
+    shader_ptr->setMat4("model", model);
+
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, terrain.getIndices().size() * sizeof(unsigned int), GL_UNSIGNED_INT, 0);
     glfwSwapBuffers(window);
@@ -106,13 +122,13 @@ void Window::processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, delta_time);
+        instance->camera.ProcessKeyboard(FORWARD, delta_time);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, delta_time);
+        instance->camera.ProcessKeyboard(BACKWARD, delta_time);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         camera.ProcessKeyboard(LEFT, delta_time);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, delta_time);
+        instance->camera.ProcessKeyboard(RIGHT, delta_time);
 }
 
 void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
