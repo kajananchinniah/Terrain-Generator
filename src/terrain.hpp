@@ -3,8 +3,6 @@
 #include <vector>
 #include <iostream>
 
-#include "PerlinNoise.h"
-
 class Terrain
 {
     public:
