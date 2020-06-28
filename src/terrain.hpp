@@ -13,7 +13,6 @@ class Terrain
     private:
         std::vector<float> vertices;
         std::vector<unsigned int> indices; 
-        std::vector<int> p;
         int grid_size_x = 120;
         int grid_size_z = 120;
 };
