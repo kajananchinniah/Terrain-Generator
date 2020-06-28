@@ -18,7 +18,6 @@ void Terrain::generate()
     }
 
     int vert = 0;
-    int tris = 0;
     for (int z = 0; z < grid_size_z; z++)
     {
         for (int x = 0; x < grid_size_x; x++)
@@ -30,7 +29,6 @@ void Terrain::generate()
             indices.push_back(vert + grid_size_x + 1);
             indices.push_back(vert + grid_size_x + 2);
             vert++;
-            tris = tris + 6;
         }
         vert++;
     }
