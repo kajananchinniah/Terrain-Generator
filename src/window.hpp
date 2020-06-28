@@ -9,9 +9,9 @@
 
 #include "shader.h"
 #include "camera.h"
+#include "terrain.hpp"
 
 #include <iostream>
-
 
 class Window
 {
@@ -19,6 +19,7 @@ class Window
         static Window* getInstance(); 
         int init();
         int shouldClose();
+        void setupRender();
         void render();
 
     private:
@@ -29,6 +30,14 @@ class Window
         const unsigned int WINDOW_HEIGHT = 600;
         const char* WINDOW_TITLE = "Terrain Generator";
 
+        Terrain terrain; 
+
+        unsigned int VBO, VAO, EBO;
+        std::vector<float> vertices;
+        std::vector<unsigned int> indices;
+
+        //Shader 
+        Shader *shader_ptr; 
 
         // Camera 
         Camera camera;
@@ -39,7 +48,6 @@ class Window
         // Timing 
         float delta_time;
         float last_frame;
-
 
         // Process Input 
         void processInput(GLFWwindow *window);
