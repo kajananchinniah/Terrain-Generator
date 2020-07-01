@@ -13,7 +13,9 @@ class Terrain
         
         std::vector<float> getVertices();
         std::vector<unsigned int> getIndices();
-        
+        std::vector<float> getColours();
+        std::vector<float> getLightingNormals();
+
         int getGridSizeX();
         int getGridSizeZ();
 
@@ -24,6 +26,8 @@ class Terrain
         // Parameters that should be used for opengl drawing 
         std::vector<float> vertices;
         std::vector<unsigned int> indices; 
+        std::vector<float> colours;
+        std::vector<float> normals;
 
         // Parameters related to grid size of terrain 
         int grid_size_x = 20;

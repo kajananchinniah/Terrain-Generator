@@ -49,6 +49,16 @@ std::vector<unsigned int> Terrain::getIndices()
     return indices;
 }
 
+std::vector<float> Terrain::getColours()
+{
+    return colours;
+}
+
+std::vector<float> Terrain::getLightingNormals()
+{
+    return normals;
+}
+
 float Terrain::noise(float x, float y)
 {
     // Ensures value is between 0 - 1 
