@@ -2,29 +2,30 @@
 
 void Terrain::generate()
 {
+    float max_val = octave_1 + octave_2 + octave_3; 
     // Calculate the vertex positions of all the triangles 
     for (int z = 0; z <= grid_size_z; z++)
     {
         for (int x = 0; x <= grid_size_x; x++)
         {
-            float x_ = (float)(x - grid_size_x/2) / grid_size_x;
-            float z_ = (float)(z - grid_size_z/2) / grid_size_z;
-            
+            float x_ = (float)x / (float)grid_size_x - 0.5;
+            float z_ = (float)z / (float)grid_size_z - 0.5;
+           
             float y_ = octave_1 * noise(freq_1 * x_, freq_2 * z_);
             y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
             y_ += octave_3 * noise(freq_3 * x_, freq_3 * z_); 
-           
+          
+
             // Water 
-            if (y_ < 0.1)
+            if (y_ / max_val < 0.1)
             {
-                y_ = 0.1;
                 colours.push_back(0.00f);
                 colours.push_back(0.467f);
                 colours.push_back(0.745f);
             }
 
             // Sand 
-            else if (y_ < 0.2)
+            else if (y_ / max_val < 0.15)
             {
                 colours.push_back(0.761f);
                 colours.push_back(0.698f);
@@ -32,7 +33,7 @@ void Terrain::generate()
             }
 
             // Grass 
-            else if (y_ < 0.7)
+            else if (y_ / max_val < 0.5)
             {
                 colours.push_back(0.486f);
                 colours.push_back(0.988f);
@@ -40,7 +41,7 @@ void Terrain::generate()
             }
 
             // Rock
-            else if (y_ 0.9)
+            else if (y_ / max_val < 0.7)
             {
                 colours.push_back(0.584f);
                 colours.push_back(0.580f);
@@ -56,7 +57,6 @@ void Terrain::generate()
             }
 
             float y = pow(y_, exponent);
-
             vertices.push_back(x);
             vertices.push_back(y);
             vertices.push_back(z);

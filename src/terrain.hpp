@@ -2,6 +2,10 @@
 
 #include <libnoise/noise.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <vector>
 #include <iostream>
 #include <math.h>
@@ -30,8 +34,8 @@ class Terrain
         std::vector<float> normals;
 
         // Parameters related to grid size of terrain 
-        int grid_size_x = 20;
-        int grid_size_z = 20;
+        int grid_size_x = 10;
+        int grid_size_z = 10;
 
         // Parameters related to noise generation 
         noise::module::Perlin perlin;

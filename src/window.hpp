@@ -32,7 +32,8 @@ class Window
 
         Terrain terrain; 
 
-        unsigned int VBO, VAO, EBO;
+        unsigned int VAO, EBO;
+        unsigned int VBO[2]; // 0 - vertices, 1 - colours, 2 - normals 
         std::vector<float> vertices;
         std::vector<unsigned int> indices;
         std::vector<float> normals;
