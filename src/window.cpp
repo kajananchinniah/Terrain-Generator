@@ -70,7 +70,9 @@ void Window::setupRender()
        terrain.generate();
        vertices = terrain.getVertices();
        indices = terrain.getIndices();
-   
+       colours = terrain.getColours();
+       normals = terrain.getLightingNormals();
+        
        glGenVertexArrays(1, &VAO);
        glGenBuffers(1, &VBO);
        glGenBuffers(1, &EBO);

@@ -35,6 +35,8 @@ class Window
         unsigned int VBO, VAO, EBO;
         std::vector<float> vertices;
         std::vector<unsigned int> indices;
+        std::vector<float> normals;
+        std::vector<float> colours;
 
         //Shader 
         Shader *shader_ptr; 
