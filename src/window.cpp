@@ -81,7 +81,7 @@ void Window::setupRender()
        vertices = terrain.getVertices();
        indices = terrain.getIndices();
        colours = terrain.getColours();
-
+       normals = terrain.getLightingNormals();
 
        // Generate all buffers and VAO necessary 
        glGenVertexArrays(1, &VAO);
@@ -111,7 +111,14 @@ void Window::setupRender()
 
        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
        glEnableVertexAttribArray(1);
-  
+
+       // Do the same as above but for normals 
+       glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
+       glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), &normals.front(), GL_STATIC_DRAW);
+
+       glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+       glEnableVertexAttribArray(2);
+
        glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -123,10 +130,17 @@ void Window::render()
 
     processInput(window);
 
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     shader_ptr->use();
+    shader_ptr->setVec3("light.direction", -0.2f, -1.0f, -0.3f);
+    shader_ptr->setVec3("viewPos", camera.Position);
+
+    // light properties 
+    shader_ptr->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+    shader_ptr->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+    shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);
     shader_ptr->setMat4("projection", projection);
