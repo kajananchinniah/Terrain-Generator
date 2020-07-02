@@ -10,52 +10,12 @@ void Terrain::generate()
         {
             float x_ = (float)x / (float)grid_size_x - 0.5;
             float z_ = (float)z / (float)grid_size_z - 0.5;
-           
-            float y_ = octave_1 * noise(freq_1 * x_, freq_2 * z_);
+
+            float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
             y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
             y_ += octave_3 * noise(freq_3 * x_, freq_3 * z_); 
-          
-
-            // Water 
-            if (y_ / max_val < 0.1)
-            {
-                colours.push_back(0.00f);
-                colours.push_back(0.467f);
-                colours.push_back(0.745f);
-            }
-
-            // Sand 
-            else if (y_ / max_val < 0.15)
-            {
-                colours.push_back(0.761f);
-                colours.push_back(0.698f);
-                colours.push_back(0.502f);
-            }
-
-            // Grass 
-            else if (y_ / max_val < 0.5)
-            {
-                colours.push_back(0.486f);
-                colours.push_back(0.988f);
-                colours.push_back(0.00f);
-            }
-
-            // Rock
-            else if (y_ / max_val < 0.7)
-            {
-                colours.push_back(0.584f);
-                colours.push_back(0.580f);
-                colours.push_back(0.545f);
-            }
+            generateColourAt(y_ / (octave_1 + octave_2 + octave_3));
             
-            // Snow 
-            else
-            {
-                colours.push_back(1.00f);
-                colours.push_back(1.00f);
-                colours.push_back(1.00f);
-            }
-
             float y = pow(y_, exponent);
             vertices.push_back(x);
             vertices.push_back(y);
@@ -136,5 +96,50 @@ std::vector<float> Terrain::getLightingNormals()
 float Terrain::noise(float x, float y)
 {
     // Ensures value is between 0 - 1 
-    return perlin.GetValue(x, y, 0) / 2.0 + 0.5; 
+    float rval = (perlin.GetValue(x, y, 0.5) / 2) + 0.5;
+    return rval;
+}
+
+void Terrain::generateColourAt(float y_)
+{
+    // Water 
+    if (y_ < 0.3)
+    {
+        colours.push_back(0.00f);
+        colours.push_back(0.467f);
+        colours.push_back(0.745f);
+    }
+   
+    // Sand 
+    else if (y_ < 0.5)
+    {
+        colours.push_back(0.761f);
+        colours.push_back(0.698f);
+        colours.push_back(0.502f);
+    }
+   
+    // Grass 
+    else if (y_ < 0.7)
+    {
+        colours.push_back(0.486f);
+        colours.push_back(0.988f);
+        colours.push_back(0.00f);
+    }
+   
+    // Rock
+    else if (y_ < 0.9)
+    {
+        colours.push_back(0.584f);
+        colours.push_back(0.580f);
+        colours.push_back(0.545f);
+    }
+   
+    // Snow 
+    else
+    {
+        colours.push_back(1.00f);
+        colours.push_back(1.00f);
+        colours.push_back(1.00f);
+    }
+
 }

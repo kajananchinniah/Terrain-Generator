@@ -24,6 +24,9 @@ class Terrain
         int getGridSizeZ();
 
     private:
+        // Generate colour 
+        void generateColourAt(float y);
+
         // Noise function
         float noise(float, float);
 
@@ -34,19 +37,19 @@ class Terrain
         std::vector<float> normals;
 
         // Parameters related to grid size of terrain 
-        int grid_size_x = 10;
-        int grid_size_z = 10;
+        int grid_size_x = 20;
+        int grid_size_z = 20;
 
         // Parameters related to noise generation 
         noise::module::Perlin perlin;
-        float freq_1 = 1; 
-        float freq_2 = 3.5;
-        float freq_3 = 2.25;
+        float freq_1 = 1.00f; 
+        float freq_2 = 2.00f;
+        float freq_3 = 4.00f;
 
-        float octave_1 = 1;
-        float octave_2 = 0.75;
-        float octave_3 = 0.25;
+        float octave_1 = 0.15f;
+        float octave_2 = 1.00f;
+        float octave_3 = 0.11f;
 
-        float exponent = 1.75; 
+        float exponent = 7.00f; 
 };
 
