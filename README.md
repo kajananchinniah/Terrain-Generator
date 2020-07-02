@@ -13,7 +13,7 @@ To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the
 
 To learn about terrain generation, I consulted three resources:
 - https://www.youtube.com/watch?v=64NblGkAabk 
-    - I heavily based my terrain.cpp's generate method  on the implementation found here
+    - I based the vertex and index generation from this resource 
 - https://www.redblobgames.com/maps/terrain-from-noise
 -   - This outlined basically everything I needed to know 
 - http://www.lighthouse3d.com/opengl/terrain/index.php?normals
