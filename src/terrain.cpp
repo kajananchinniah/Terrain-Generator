@@ -102,39 +102,48 @@ float Terrain::noise(float x, float y)
 
 void Terrain::generateColourAt(float y_)
 {
-    // Water 
-    if (y_ < 0.3)
+    if (y_ < 0.375)
     {
         colours.push_back(0.00f);
-        colours.push_back(0.467f);
-        colours.push_back(0.745f);
-    }
-   
-    // Sand 
-    else if (y_ < 0.5)
-    {
-        colours.push_back(0.761f);
-        colours.push_back(0.698f);
+        colours.push_back(0.00f);
         colours.push_back(0.502f);
     }
-   
-    // Grass 
-    else if (y_ < 0.7)
+
+    else if (y_ < 0.5)
     {
-        colours.push_back(0.486f);
-        colours.push_back(0.988f);
+        colours.push_back(0.00f);
+        colours.push_back(0.00f);
+        colours.push_back(1.00f);
+    }
+
+    else if (y_ < 0.53125)
+    {
+        colours.push_back(0.000f);
+        colours.push_back(0.502f);
+        colours.push_back(1.00f);
+    }
+
+    else if (y_ < 0.5625)
+    {
+        colours.push_back(0.941f);
+        colours.push_back(0.941f);
+        colours.push_back(0.251f);
+    }
+
+    else if (y_ < 0.6875)
+    {
+        colours.push_back(0.125f);
+        colours.push_back(0.627f);
         colours.push_back(0.00f);
     }
-   
-    // Rock
-    else if (y_ < 0.9)
+
+    else if (y_ < 0.95)
     {
-        colours.push_back(0.584f);
-        colours.push_back(0.580f);
-        colours.push_back(0.545f);
+        colours.push_back(0.502f);
+        colours.push_back(0.502f);
+        colours.push_back(0.502f);
     }
-   
-    // Snow 
+
     else
     {
         colours.push_back(1.00f);
