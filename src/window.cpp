@@ -85,7 +85,7 @@ void Window::setupRender()
 
        // Generate all buffers and VAO necessary 
        glGenVertexArrays(1, &VAO);
-       glGenBuffers(2, VBO);
+       glGenBuffers(3, VBO);
        glGenBuffers(1, &EBO);
    
        // Bind VAO 
@@ -138,8 +138,8 @@ void Window::render()
     shader_ptr->setVec3("viewPos", camera.Position);
 
     // light properties 
-    shader_ptr->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-    shader_ptr->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+    shader_ptr->setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
+    shader_ptr->setVec3("light.diffuse", 0.1f, 0.1f, 0.1f);
     shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);
