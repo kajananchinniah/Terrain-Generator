@@ -42,6 +42,7 @@ void Terrain::generate()
     }
 
 
+    // CURRENTLY I DON'T THINK THIS WORKS 
     // TODO: clean this area; it's written messy 
     std::vector<glm::vec3> extracted_vertices;
     for (int i = 0; i < indices.size(); i+=3)
