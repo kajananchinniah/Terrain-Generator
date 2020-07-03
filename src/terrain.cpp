@@ -42,7 +42,6 @@ void Terrain::generate()
     }
 
 
-    // CURRENTLY I DON'T THINK THIS WORKS 
     // TODO: clean this area; it's written messy 
     std::vector<glm::vec3> extracted_vertices;
     for (int i = 0; i < indices.size(); i+=3)
@@ -50,7 +49,7 @@ void Terrain::generate()
         // Get the indices associated with a triangles
         unsigned int idx_1 = indices[i];
         unsigned int idx_2 = indices[i+1];
-        unsigned int idx_3 = indices[i+3];
+        unsigned int idx_3 = indices[i+2];
 
         // Get the vertices associated with the indices 
         // Multiply by 3 because each vertex has 3 points associated to it 
@@ -66,7 +65,7 @@ void Terrain::generate()
         glm::vec3 v1 = t2 - t1;
         glm::vec3 v2 = t3 - t1;
 
-        glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+        glm::vec3 normal = glm::normalize(-glm::cross(v1, v2));
        
         normals.push_back(normal.x); 
         normals.push_back(normal.y);
