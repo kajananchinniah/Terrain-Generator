@@ -77,7 +77,7 @@ int Window::shouldClose()
 void Window::setupRender()
 {
        // Generate terrain attributes 
-       terrain.generate();
+       terrain.generate(0.00f, 0.00f);
        vertices = terrain.getVertices();
        indices = terrain.getIndices();
        colours = terrain.getColours();
@@ -138,8 +138,8 @@ void Window::render()
     shader_ptr->setVec3("viewPos", camera.Position);
 
     // light properties 
-    shader_ptr->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
-    shader_ptr->setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
+    shader_ptr->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+    shader_ptr->setVec3("light.diffuse", 0.85f, 0.85f, 0.85f);
     shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);
