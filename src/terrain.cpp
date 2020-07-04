@@ -1,76 +1,16 @@
 #include "terrain.hpp"
 
-void Terrain::generate()
+void Terrain::generate(float x_offset, float z_offset)
 {
-    float max_val = octave_1 + octave_2 + octave_3; 
-    // Calculate the vertex positions of all the triangles 
-    for (int z = 0; z <= grid_size_z; z++)
-    {
-        for (int x = 0; x <= grid_size_x; x++)
-        {
-            float x_ = (float)x / (float)grid_size_x;
-            float z_ = (float)z / (float)grid_size_z;
+    vertices.clear();
+    normals.clear();
+    colours.clear();
+    indices.clear();
 
-            float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
-            y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
-            y_ += octave_3 * noise(freq_3 * x_, freq_3 * z_); 
-            generateColourAt(y_ / (octave_1 + octave_2 + octave_3));
-            
-            float y = pow(y_, exponent);
-            vertices.push_back(x);
-            vertices.push_back(y);
-            vertices.push_back(z);
-        }
-        
-    }
+    generateVertices(x_offset, z_offset); 
+    generateIndices();
+    generateLightingNormals();
 
-    // Calculate the indices associated with each triangle for drawing 
-    int vert = 0;
-    for (int z = 0; z < grid_size_z; z++)
-    {
-        for (int x = 0; x < grid_size_x; x++)
-        {
-            indices.push_back(vert);
-            indices.push_back(vert + grid_size_x + 1);
-            indices.push_back(vert + 1);
-            indices.push_back(vert + 1);
-            indices.push_back(vert + grid_size_x + 1);
-            indices.push_back(vert + grid_size_x + 2);
-            vert++;
-        }
-        vert++;
-    }
-
-
-    // TODO: clean this area; it's written messy 
-    std::vector<glm::vec3> extracted_vertices;
-    for (int i = 0; i < indices.size(); i+=3)
-    {
-        // Get the indices associated with a triangles
-        unsigned int idx_1 = indices[i];
-        unsigned int idx_2 = indices[i+1];
-        unsigned int idx_3 = indices[i+2];
-
-        // Get the vertices associated with the indices 
-        // Multiply by 3 because each vertex has 3 points associated to it 
-        unsigned int vertex_pos = 3 * idx_1; 
-        glm::vec3 t1 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-
-        vertex_pos = 3 * idx_2;
-        glm::vec3 t2 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-
-        vertex_pos = 3 * idx_3;
-        glm::vec3 t3 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-
-        glm::vec3 v1 = t2 - t1;
-        glm::vec3 v2 = t3 - t1;
-
-        glm::vec3 normal = glm::normalize(-glm::cross(v1, v2));
-       
-        normals.push_back(normal.x); 
-        normals.push_back(normal.y);
-        normals.push_back(normal.z);
-    }
 }
 
 std::vector<float> Terrain::getVertices()
@@ -102,7 +42,6 @@ float Terrain::noise(float x, float y)
 
 void Terrain::generateColourAt(float y_)
 {
-    std::cout << y_ << "\n";
     if (y_ < 0.375)
     {
         colours.push_back(0.00f);
@@ -138,7 +77,7 @@ void Terrain::generateColourAt(float y_)
         colours.push_back(0.00f);
     }
 
-    else if (y_ < 0.875)
+    else if (y_ < 0.95)
     {
         colours.push_back(0.208f);
         colours.push_back(0.137f);
@@ -152,4 +91,92 @@ void Terrain::generateColourAt(float y_)
         colours.push_back(1.00f);
     }
 
+}
+
+int Terrain::getGridSizeX()
+{
+    return grid_size_x;
+}
+
+int Terrain::getGridSizeZ()
+{
+    return grid_size_z;
+}
+
+void Terrain::generateVertices(float x_offset, float z_offset)
+{
+    float max_val = octave_1 + octave_2 + octave_3;
+    // Calculate the vertex positions of all the triangles
+    for (int z = 0; z <= grid_size_z; z++)
+    {
+        for (int x = 0; x <= grid_size_x; x++)
+        {
+            float x_ = (float) (x + x_offset) / (float)grid_size_x;
+            float z_ = (float) (z + z_offset) / (float)grid_size_z;
+
+            float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
+            y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
+            y_ += octave_3 * noise(freq_3 * x_, freq_3 * z_);
+            generateColourAt(y_ / (octave_1 + octave_2 + octave_3));
+
+            float y = pow(y_, exponent);
+            vertices.push_back(x);
+            vertices.push_back(y);
+            vertices.push_back(z);
+        }
+
+    }
+
+}
+
+void Terrain::generateIndices()
+{
+    // Calculate the indices associated with each triangle for drawing
+    int vert = 0;
+    for (int z = 0; z < grid_size_z; z++)
+    {
+        for (int x = 0; x < grid_size_x; x++)
+        {
+            indices.push_back(vert);
+            indices.push_back(vert + grid_size_x + 1);
+            indices.push_back(vert + 1);
+            indices.push_back(vert + 1);
+            indices.push_back(vert + grid_size_x + 1);
+            indices.push_back(vert + grid_size_x + 2);
+            vert++;
+        }
+        vert++;
+    }
+}
+
+void Terrain::generateLightingNormals()
+{
+    // TODO: clean this area; it's written messy 
+    for (int i = 0; i < indices.size(); i+=3)
+    {
+        // Get the indices associated with a triangles
+        unsigned int idx_1 = indices[i];
+        unsigned int idx_2 = indices[i+1];
+        unsigned int idx_3 = indices[i+2];
+   
+        // Get the vertices associated with the indices 
+        // Multiply by 3 because each vertex has 3 points associated to it 
+        unsigned int vertex_pos = 3 * idx_1;
+        glm::vec3 t1 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
+   
+        vertex_pos = 3 * idx_2;
+        glm::vec3 t2 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
+   
+        vertex_pos = 3 * idx_3;
+        glm::vec3 t3 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
+   
+        glm::vec3 v1 = t2 - t1;
+        glm::vec3 v2 = t3 - t1;
+   
+        glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+   
+        normals.push_back(normal.x);
+        normals.push_back(normal.y);
+        normals.push_back(normal.z);
+    }
 }

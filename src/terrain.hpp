@@ -13,7 +13,7 @@
 class Terrain
 {
     public:
-        void generate();
+        void generate(float, float);
         
         std::vector<float> getVertices();
         std::vector<unsigned int> getIndices();
@@ -24,8 +24,11 @@ class Terrain
         int getGridSizeZ();
 
     private:
-        // Generate colour 
+        // Generation functions 
         void generateColourAt(float y);
+        void generateVertices(float, float);
+        void generateIndices();
+        void generateLightingNormals(); 
 
         // Noise function
         float noise(float, float);
