@@ -130,7 +130,7 @@ void Window::render()
 
     processInput(window);
 
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.3f, 0.2f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     shader_ptr->use();
@@ -138,8 +138,8 @@ void Window::render()
     shader_ptr->setVec3("viewPos", camera.Position);
 
     // light properties 
-    shader_ptr->setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
-    shader_ptr->setVec3("light.diffuse", 0.1f, 0.1f, 0.1f);
+    shader_ptr->setVec3("light.ambient", 1.0:, 1.0f, 1.0f);
+    shader_ptr->setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
     shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);

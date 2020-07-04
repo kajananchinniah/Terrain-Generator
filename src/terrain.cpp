@@ -96,12 +96,13 @@ std::vector<float> Terrain::getLightingNormals()
 float Terrain::noise(float x, float y)
 {
     // Ensures value is between 0 - 1 
-    float rval = (perlin.GetValue(x, y, 0.5) / 2) + 0.5;
+    float rval = (perlin.GetValue(x, y, 0.0r / 2) + 0.5;
     return rval;
 }
 
 void Terrain::generateColourAt(float y_)
 {
+    std::cout << y_ << "\n";
     if (y_ < 0.375)
     {
         colours.push_back(0.00f);
@@ -137,11 +138,11 @@ void Terrain::generateColourAt(float y_)
         colours.push_back(0.00f);
     }
 
-    else if (y_ < 0.95)
+    else if (y_ < 0.875)
     {
-        colours.push_back(0.502f);
-        colours.push_back(0.502f);
-        colours.push_back(0.502f);
+        colours.push_back(0.208f);
+        colours.push_back(0.137f);
+        colours.push_back(0.114f);
     }
 
     else
