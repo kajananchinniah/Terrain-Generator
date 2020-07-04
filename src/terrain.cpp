@@ -8,8 +8,8 @@ void Terrain::generate()
     {
         for (int x = 0; x <= grid_size_x; x++)
         {
-            float x_ = (float)x / (float)grid_size_x - 0.5;
-            float z_ = (float)z / (float)grid_size_z - 0.5;
+            float x_ = (float)x / (float)grid_size_x;
+            float z_ = (float)z / (float)grid_size_z;
 
             float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
             y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
@@ -96,7 +96,7 @@ std::vector<float> Terrain::getLightingNormals()
 float Terrain::noise(float x, float y)
 {
     // Ensures value is between 0 - 1 
-    float rval = (perlin.GetValue(x, y, 0.0r / 2) + 0.5;
+    float rval = (perlin.GetValue(x, y, 0.0) / 2.0f + 0.5f;
     return rval;
 }
 

@@ -138,7 +138,7 @@ void Window::render()
     shader_ptr->setVec3("viewPos", camera.Position);
 
     // light properties 
-    shader_ptr->setVec3("light.ambient", 1.0:, 1.0f, 1.0f);
+    shader_ptr->setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
     shader_ptr->setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
     shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
