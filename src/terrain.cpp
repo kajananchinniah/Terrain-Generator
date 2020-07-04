@@ -96,7 +96,7 @@ std::vector<float> Terrain::getLightingNormals()
 float Terrain::noise(float x, float y)
 {
     // Ensures value is between 0 - 1 
-    float rval = (perlin.GetValue(x, y, 0.0) / 2.0f + 0.5f;
+    float rval = perlin.GetValue(x, y, 0.0) / 2.0f + 0.5f;
     return rval;
 }
 
