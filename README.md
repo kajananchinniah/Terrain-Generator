@@ -18,3 +18,5 @@ To learn about terrain generation, I consulted three resources:
 -   - This outlined basically everything I needed to know 
 - http://www.lighthouse3d.com/opengl/terrain/index.php?normals
 -   - This helped me calculate the normals for lighting purposes 
+- https://gamedev.stackexchange.com/questions/174176/flat-shading-does-not-work-correctly-opengl
+-   - I plan on changing my normal calculation into this
