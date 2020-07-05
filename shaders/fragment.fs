@@ -20,7 +20,6 @@ uniform Light light;
 
 void main()
 {
-    float levels = 4.0f;
     // ambient 
     vec3 ambient = light.ambient * Color;
     
@@ -28,20 +27,16 @@ void main()
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(-light.direction);
     float diff = max(dot(norm, lightDir), 0.0);
-    float level = floor(diff * levels);
-    diff = level / levels;
     vec3 diffuse = light.diffuse * diff * Color;
 
     // specular 
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = max(dot(viewDir, reflectDir), 0.0);
-    level = floor(spec * levels);
-    spec = level / levels;
     vec3 specular = light.specular * spec * Color;
 
     vec3 result = ambient + diffuse + specular; 
 
-    FragColor = vec4(Color, 1.0f);
+    FragColor = vec4(result, 1.0f);
 }
 
