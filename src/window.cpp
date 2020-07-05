@@ -146,10 +146,11 @@ void Window::render()
     shader_ptr->setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
-    shader_ptr->setMat4("view", view);    
+    shader_ptr->setMat4("view", view);
+    //TODO : clean this part up
     for (int i = 0; i < 3; i++)
     {
-        float x_trans = 0.00f; float z_trans = 0.00f;
+        float z_trans = floor(camera.Position.z / terrains[i].getGridSizeZ()) * terrains[i].getGridSizeZ();
         if (i == 0)
             z_trans += terrains[i].getGridSizeZ();
         if (i == 1)
@@ -159,13 +160,14 @@ void Window::render()
 
         for (int j = 0; j < 3; j++)
         {
+            float x_trans = floor(camera.Position.x / terrains[i].getGridSizeX()) * terrains[i].getGridSizeX(); 
             if (j == 0)
                 x_trans += -1.0f * terrains[i].getGridSizeX();
             if (j == 1)
                 x_trans += 0.00f;
             if (j == 2)
                 x_trans += terrains[i].getGridSizeX();
-
+           
            setupRender(terrains[i], x_trans, z_trans, VAOs[i]);
            glBindVertexArray(VAOs[i]);
            glm::mat4 model = glm::mat4(1.0f);
