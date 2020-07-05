@@ -19,14 +19,15 @@ Window::Window()
 int Window::init()
 {
     // Initialize constants 
-    instance->camera = Camera(glm::vec3(0.0f, 1.0f, 0.0f));
+    instance->camera = Camera(glm::vec3(terrain.getGridSizeX() / 2.0f, 1.0f, terrain.getGridSizeZ() / 2.0f));
     instance->last_x = WINDOW_WIDTH / 2.0f;
     instance->last_y = WINDOW_HEIGHT / 2.0f;
     instance->first_mouse = true;
     instance->delta_time = 0.0f;
     instance->last_frame = 0.0f;
     instance->camera_near = 0.1f;
-    instance->camera_far = 100.0f; //TODO :update these values 
+    instance->camera_far = std::min(terrain.getGridSizeX() / 2.0f, terrain.getGridSizeZ() / 2.0f);
+    
 
     // Initialize GLFW 
     glfwInit();
@@ -77,7 +78,7 @@ int Window::shouldClose()
 void Window::setupRender()
 {
        // Generate terrain attributes 
-       terrain.generate(0.00f, 0.00f);
+       terrain.generate();
        vertices = terrain.getVertices();
        indices = terrain.getIndices();
        colours = terrain.getColours();
@@ -128,6 +129,8 @@ void Window::render()
     delta_time = current_frame - last_frame;
     last_frame = current_frame; 
 
+
+    setupRender();
     processInput(window);
 
     glClearColor(0.3f, 0.2f, 0.5f, 1.0f);
@@ -139,7 +142,7 @@ void Window::render()
 
     // light properties 
     shader_ptr->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-    shader_ptr->setVec3("light.diffuse", 0.85f, 0.85f, 0.85f);
+    shader_ptr->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
     shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, camera_near, camera_far);
@@ -163,13 +166,33 @@ void Window::processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        instance->camera.ProcessKeyboard(FORWARD, delta_time);
+    {
+        terrain.x_pos += camera.Front.x * 2.5 * delta_time;
+        terrain.z_pos += camera.Front.z * 2.5 * delta_time;
+    }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        instance->camera.ProcessKeyboard(BACKWARD, delta_time);
+    {
+        terrain.x_pos -= camera.Front.x * 2.5 * delta_time;
+        terrain.z_pos -= camera.Front.z * 2.5 * delta_time;
+    }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, delta_time);
+    {
+        terrain.x_pos -= camera.Right.x * 2.5 * delta_time;
+        terrain.z_pos -= camera.Right.z * 2.5 * delta_time;
+    }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        instance->camera.ProcessKeyboard(RIGHT, delta_time);
+    {
+        terrain.x_pos += camera.Right.x * 2.5 * delta_time;
+        terrain.z_pos += camera.Right.z * 2.5 * delta_time;
+    }
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+    {
+        camera.ProcessKeyboard(UP, delta_time);
+    }
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    {
+        camera.ProcessKeyboard(DOWN, delta_time);
+    }
 }
 
 void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)

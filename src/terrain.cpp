@@ -1,13 +1,13 @@
 #include "terrain.hpp"
 
-void Terrain::generate(float x_offset, float z_offset)
+void Terrain::generate()
 {
     vertices.clear();
     normals.clear();
     colours.clear();
     indices.clear();
 
-    generateVertices(x_offset, z_offset); 
+    generateVertices(); 
     generateIndices();
     generateLightingNormals();
 
@@ -77,6 +77,13 @@ void Terrain::generateColourAt(float y_)
         colours.push_back(0.00f);
     }
 
+    else if (y_ < 0.81875)
+    {
+        colours.push_back(0.5);
+        colours.push_back(0.5);
+        colours.push_back(0.5);
+    }
+
     else if (y_ < 0.95)
     {
         colours.push_back(0.208f);
@@ -103,7 +110,7 @@ int Terrain::getGridSizeZ()
     return grid_size_z;
 }
 
-void Terrain::generateVertices(float x_offset, float z_offset)
+void Terrain::generateVertices()
 {
     float max_val = octave_1 + octave_2 + octave_3;
     // Calculate the vertex positions of all the triangles
@@ -111,8 +118,8 @@ void Terrain::generateVertices(float x_offset, float z_offset)
     {
         for (int x = 0; x <= grid_size_x; x++)
         {
-            float x_ = (float) (x + x_offset) / (float)grid_size_x;
-            float z_ = (float) (z + z_offset) / (float)grid_size_z;
+            float x_ = (float) (x + x_pos) / (float)grid_size_x;
+            float z_ = (float) (z + z_pos) / (float)grid_size_z;
 
             float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
             y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);

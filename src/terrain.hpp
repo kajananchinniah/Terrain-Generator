@@ -13,7 +13,7 @@
 class Terrain
 {
     public:
-        void generate(float, float);
+        void generate();
         
         std::vector<float> getVertices();
         std::vector<unsigned int> getIndices();
@@ -23,10 +23,13 @@ class Terrain
         int getGridSizeX();
         int getGridSizeZ();
 
+        float x_pos;
+        float z_pos;
+
     private:
         // Generation functions 
         void generateColourAt(float y);
-        void generateVertices(float, float);
+        void generateVertices();
         void generateIndices();
         void generateLightingNormals(); 
 
@@ -40,8 +43,8 @@ class Terrain
         std::vector<float> normals;
 
         // Parameters related to grid size of terrain 
-        int grid_size_x = 20;
-        int grid_size_z = 20;
+        int grid_size_x = 100;
+        int grid_size_z = 100;
 
         // Parameters related to noise generation 
         noise::module::Perlin perlin;
