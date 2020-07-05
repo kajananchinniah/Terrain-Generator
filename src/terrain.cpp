@@ -1,13 +1,13 @@
 #include "terrain.hpp"
 
-void Terrain::generate()
+void Terrain::generate(float x_pos, float z_pos)
 {
     vertices.clear();
     normals.clear();
     colours.clear();
     indices.clear();
 
-    generateVertices(); 
+    generateVertices(x_pos, z_pos); 
     generateIndices();
     generateLightingNormals();
 
@@ -110,7 +110,7 @@ int Terrain::getGridSizeZ()
     return grid_size_z;
 }
 
-void Terrain::generateVertices()
+void Terrain::generateVertices(float x_pos, float z_pos)
 {
     float max_val = octave_1 + octave_2 + octave_3;
     // Calculate the vertex positions of all the triangles

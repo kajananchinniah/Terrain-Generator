@@ -19,14 +19,14 @@ Window::Window()
 int Window::init()
 {
     // Initialize constants 
-    instance->camera = Camera(glm::vec3(terrain.getGridSizeX() / 2.0f, 1.0f, terrain.getGridSizeZ() / 2.0f));
+    instance->camera = Camera(glm::vec3(0.0f, 1.0f, 0.0f));
     instance->last_x = WINDOW_WIDTH / 2.0f;
     instance->last_y = WINDOW_HEIGHT / 2.0f;
     instance->first_mouse = true;
     instance->delta_time = 0.0f;
     instance->last_frame = 0.0f;
     instance->camera_near = 0.1f;
-    instance->camera_far = std::min(terrain.getGridSizeX() / 2.0f, terrain.getGridSizeZ() / 2.0f);
+    instance->camera_far = std::min(terrains[0].getGridSizeX(), terrains[0].getGridSizeZ());
     
 
     // Initialize GLFW 
@@ -65,8 +65,6 @@ int Window::init()
     // Initialize shader class with shaders from before 
     instance->shader_ptr = new Shader("../shaders/vertex.vs", "../shaders/fragment.fs");
    
-    // Setup rendering stuff 
-    setupRender();
     return 0;
 }
 
@@ -75,10 +73,10 @@ int Window::shouldClose()
     return glfwWindowShouldClose(window);
 }
 
-void Window::setupRender()
+void Window::setupRender(Terrain &terrain, float x, float z, unsigned int &VAO)
 {
        // Generate terrain attributes 
-       terrain.generate();
+       terrain.generate(x, z);
        vertices = terrain.getVertices();
        indices = terrain.getIndices();
        colours = terrain.getColours();
@@ -130,7 +128,6 @@ void Window::render()
     last_frame = current_frame; 
 
 
-    setupRender();
     processInput(window);
 
     glClearColor(0.3f, 0.2f, 0.5f, 1.0f);
@@ -149,13 +146,35 @@ void Window::render()
     shader_ptr->setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
-    shader_ptr->setMat4("view", view);
+    shader_ptr->setMat4("view", view);    
+    for (int i = 0; i < 3; i++)
+    {
+        float x_trans = 0.00f; float z_trans = 0.00f;
+        if (i == 0)
+            z_trans += terrains[i].getGridSizeZ();
+        if (i == 1)
+            z_trans += 0.00f;
+        if (i == 2)
+            z_trans += -1.0f * terrains[i].getGridSizeZ();
 
-    glm::mat4 model = glm::mat4(1.0f);
-    shader_ptr->setMat4("model", model);
+        for (int j = 0; j < 3; j++)
+        {
+            if (j == 0)
+                x_trans += -1.0f * terrains[i].getGridSizeX();
+            if (j == 1)
+                x_trans += 0.00f;
+            if (j == 2)
+                x_trans += terrains[i].getGridSizeX();
 
-    glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, terrain.getIndices().size() * sizeof(unsigned int), GL_UNSIGNED_INT, 0);
+           setupRender(terrains[i], x_trans, z_trans, VAOs[i]);
+           glBindVertexArray(VAOs[i]);
+           glm::mat4 model = glm::mat4(1.0f);
+           model = glm::translate(model, glm::vec3(x_trans, 0, z_trans));
+           shader_ptr->setMat4("model", model);
+           glDrawElements(GL_TRIANGLES, terrains[i].getIndices().size() * sizeof(unsigned int), GL_UNSIGNED_INT, 0);
+
+        }
+    }
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
@@ -167,23 +186,19 @@ void Window::processInput(GLFWwindow *window)
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-        terrain.x_pos += camera.Front.x * 2.5 * delta_time;
-        terrain.z_pos += camera.Front.z * 2.5 * delta_time;
+        camera.ProcessKeyboard(FORWARD, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        terrain.x_pos -= camera.Front.x * 2.5 * delta_time;
-        terrain.z_pos -= camera.Front.z * 2.5 * delta_time;
+        camera.ProcessKeyboard(BACKWARD, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-        terrain.x_pos -= camera.Right.x * 2.5 * delta_time;
-        terrain.z_pos -= camera.Right.z * 2.5 * delta_time;
+        camera.ProcessKeyboard(LEFT, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-        terrain.x_pos += camera.Right.x * 2.5 * delta_time;
-        terrain.z_pos += camera.Right.z * 2.5 * delta_time;
+        camera.ProcessKeyboard(RIGHT, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
     {

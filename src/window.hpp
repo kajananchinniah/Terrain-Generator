@@ -19,8 +19,9 @@ class Window
         static Window* getInstance(); 
         int init();
         int shouldClose();
-        void setupRender();
+        void setupRender(Terrain&, float, float, unsigned int&);
         void render();
+
 
     private:
         static Window* instance;
@@ -30,9 +31,9 @@ class Window
         const unsigned int WINDOW_HEIGHT = 600;
         const char* WINDOW_TITLE = "Terrain Generator";
 
-        Terrain terrain; 
+        Terrain terrains[9]; 
 
-        unsigned int VAO, EBO;
+        unsigned int VAOs[9], EBO;
         unsigned int VBO[3]; // 0 - vertices, 1 - colours, 2 - normals 
         std::vector<float> vertices;
         std::vector<unsigned int> indices;
