@@ -121,7 +121,7 @@ void Terrain::generateVertices()
             float x_ = (float) (x + x_pos) / (float)grid_size_x;
             float z_ = (float) (z + z_pos) / (float)grid_size_z;
 
-            float y_ = octave_1 * noise(freq_1 * x, freq_2 * z);
+            float y_ = octave_1 * noise(freq_1 * x_, freq_2 * z_);
             y_ += octave_2 * noise(freq_2 * x_, freq_2 * z_);
             y_ += octave_3 * noise(freq_3 * x_, freq_3 * z_);
             generateColourAt(y_ / (octave_1 + octave_2 + octave_3));
