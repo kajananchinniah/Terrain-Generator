@@ -10,8 +10,9 @@ Simply clone the repository, with any dependencies, and compile it using: `g++ s
 
 ## Things I have to do
 - Clean up code (I hope to make a terrain manager class that deals with all the 9 terrains I generate)
+- Add a skybox (likely will be following a tutorial to do this)
 - Figure out why the lighting looks really bad 
-- Add a skybox 
+
 
 ## Acknowledgements / References 
 To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my shaders are also heavily based on the examples found in this book.  
