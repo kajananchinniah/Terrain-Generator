@@ -42,53 +42,54 @@ float Terrain::noise(float x, float y)
 
 void Terrain::generateColourAt(float y_)
 {
-    if (y_ < 0.375)
+    if (y_ < DEEP_WATER_LEVEL)
     {
         colours.push_back(0.00f);
         colours.push_back(0.00f);
         colours.push_back(0.502f);
     }
 
-    else if (y_ < 0.5)
+    else if (y_ < SHALLOW_WATER_LEVEL)
     {
         colours.push_back(0.00f);
         colours.push_back(0.00f);
         colours.push_back(1.00f);
     }
 
-    else if (y_ < 0.53125)
+    else if (y_ < SHORE_LEVEL)
     {
         colours.push_back(0.000f);
         colours.push_back(0.502f);
         colours.push_back(1.00f);
     }
 
-    else if (y_ < 0.5625)
+    else if (y_ < SAND_LEVEL)
     {
         colours.push_back(0.941f);
         colours.push_back(0.941f);
         colours.push_back(0.251f);
     }
 
-    else if (y_ < 0.6875)
+    else if (y_ < GRASS_LEVEL)
     {
         colours.push_back(0.125f);
         colours.push_back(0.627f);
         colours.push_back(0.00f);
     }
 
-    else if (y_ < 0.81875)
+    else if (y_ < DIRT_LEVEL)
     {
-        colours.push_back(0.5);
-        colours.push_back(0.5);
-        colours.push_back(0.5);
-    }
 
-    else if (y_ < 0.95)
-    {
         colours.push_back(0.208f);
         colours.push_back(0.137f);
         colours.push_back(0.114f);
+    }
+
+    else if (y_ < ROCK_LEVEL)
+    {
+        colours.push_back(0.5);
+        colours.push_back(0.5);
+        colours.push_back(0.5);
     }
 
     else
