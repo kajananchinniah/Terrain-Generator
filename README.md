@@ -6,7 +6,7 @@ TODO
 Note: I include some libraries that I didn't write in the include (this is bad practice but I did it anyways). 
 
 ## Getting started 
-Simply clone the repository, with any dependencies, and compile it using: `g++ src/main.cpp src/glad.c src/window.cpp src/terrain.cpp -I include/ -I include/glm/ -lglfw -ldl -lnoise`. I plan on adding a makefile later on.
+Simply clone the repository, with any dependencies, and compile it using: `make TerrainGenerator.sh`
 
 ## Things I have to do
 - Clean up code (I hope to make a terrain manager class that deals with all the 9 terrains I generate)

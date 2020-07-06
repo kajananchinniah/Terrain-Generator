@@ -1,5 +1,3 @@
-# A simple makefile based on CS50's SDL seminar that's modified for opengl use 
-
 # set the compiler 
 CC := g++
 
@@ -16,7 +14,7 @@ HDRS := src/window.hpp src/terrain.hpp
 SRCS := src/main.cpp src/window.cpp src/terrain.cpp src/glad.c 
 
 # name of executable
-EXEC := TerrainGenerator 
+EXEC := TerrainGenerator.sh 
 
 # default recipe
 all: $(EXEC)
