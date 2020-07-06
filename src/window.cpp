@@ -63,7 +63,7 @@ int Window::init()
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     // Initialize shader class with shaders from before 
-    instance->shader_ptr = new Shader("../shaders/vertex.vs", "../shaders/fragment.fs");
+    instance->shader_ptr = new Shader("shaders/vertex.vs", "shaders/fragment.fs");
    
     return 0;
 }
