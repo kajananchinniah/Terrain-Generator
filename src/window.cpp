@@ -167,9 +167,10 @@ void Window::render()
                 x_trans += 0.00f;
             if (j == 2)
                 x_trans += terrains[i].getGridSizeX();
-           
-           setupRender(terrains[i], x_trans, z_trans, VAOs[i]);
-           glBindVertexArray(VAOs[i]);
+          
+           int idx = 3 * i + j;
+           setupRender(terrains[idx], x_trans, z_trans, VAOs[idx]);
+           glBindVertexArray(VAOs[idx]);
            glm::mat4 model = glm::mat4(1.0f);
            model = glm::translate(model, glm::vec3(x_trans, 0, z_trans));
            shader_ptr->setMat4("model", model);
