@@ -25,10 +25,6 @@ class Window
 
 
     private:
-        void draw(const glm::mat4&, const glm::mat4&);
-        void loadCubemap();
-        void setupSkyRender();
-
         static Window* instance;
         Window();
         GLFWwindow *window; 
@@ -48,7 +44,6 @@ class Window
 
         //Shader 
         Shader *shader_ptr; 
-        Shader *skybox_shader;
         
         // Camera 
         Camera camera;
