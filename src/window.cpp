@@ -57,7 +57,7 @@ int Window::init()
         return -1;
     }
 
-    instance->skybox = new Skybox();
+    instance->skybox_ptr = new Skybox();
 
     // Enable depth 
     glEnable(GL_DEPTH_TEST);
@@ -181,7 +181,7 @@ void Window::render()
         }
     }
 
-    skybox->draw(view, projection);
+    skybox_ptr->draw(view, projection);
     glfwSwapBuffers(window);
     glfwPollEvents();
 }

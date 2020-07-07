@@ -33,7 +33,7 @@ class Window
         const char* WINDOW_TITLE = "Terrain Generator";
 
         Terrain terrains[9]; 
-        Skybox *skybox;
+        Skybox *skybox_ptr;
 
         unsigned int VAOs[9], EBO;
         unsigned int VBO[3]; // 0 - vertices, 1 - colours, 2 - normals 
