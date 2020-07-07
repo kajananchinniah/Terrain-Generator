@@ -44,11 +44,10 @@ After having all the prerequisites, Simply clone the repository and compile usin
 
 ## TODO
 - Clean up code (I hope to make a terrain manager class that deals with all the 9 terrains I generate)
-- Add a skybox (likely will be following a tutorial to do this)
 - Figure out why the lighting looks really bad 
 
 ## Acknowledgements / References 
-To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my shaders are also heavily based on the examples found in this book. I likely will be taking my skybox code from here as well once it's ready. 
+To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my shaders are also heavily based on the examples found in this book. My implementation of the skybox class is basically all the skybox associated functions from here, but in a class. I also took the skybox shaders directly from here.   
 
 For getting started with terrain generation, I consulted this great resource by Brackeys: https://www.youtube.com/watch?v=64NblGkAabk . In particular, this helped me with vertex and index generation. 
 
