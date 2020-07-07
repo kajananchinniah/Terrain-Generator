@@ -1,7 +1,7 @@
 #pragma once
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stb_image.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -10,6 +10,7 @@
 #include "shader.h"
 #include "camera.h"
 #include "terrain.hpp"
+// #include "skybox.hpp"
 
 #include <iostream>
 
@@ -24,6 +25,10 @@ class Window
 
 
     private:
+        void draw(const glm::mat4&, const glm::mat4&);
+        void loadCubemap();
+        void setupSkyRender();
+
         static Window* instance;
         Window();
         GLFWwindow *window; 
@@ -32,6 +37,7 @@ class Window
         const char* WINDOW_TITLE = "Terrain Generator";
 
         Terrain terrains[9]; 
+        // Skybox *skybox;
 
         unsigned int VAOs[9], EBO;
         unsigned int VBO[3]; // 0 - vertices, 1 - colours, 2 - normals 
@@ -42,7 +48,10 @@ class Window
 
         //Shader 
         Shader *shader_ptr; 
-
+        Shader *skybox_shader;
+        std::vector<std::string> skybox_faces;
+        std::vector<float> skybox_vertices; 
+        unsigned int cube_map_texture, skybox_VAO, skybox_VBO;
         // Camera 
         Camera camera;
         float last_x;
