@@ -10,7 +10,7 @@
 #include "shader.h"
 #include "camera.h"
 #include "terrain.hpp"
-// #include "skybox.hpp"
+#include "skybox.hpp"
 
 #include <iostream>
 
@@ -37,7 +37,7 @@ class Window
         const char* WINDOW_TITLE = "Terrain Generator";
 
         Terrain terrains[9]; 
-        // Skybox *skybox;
+        Skybox *skybox;
 
         unsigned int VAOs[9], EBO;
         unsigned int VBO[3]; // 0 - vertices, 1 - colours, 2 - normals 
@@ -49,9 +49,7 @@ class Window
         //Shader 
         Shader *shader_ptr; 
         Shader *skybox_shader;
-        std::vector<std::string> skybox_faces;
-        std::vector<float> skybox_vertices; 
-        unsigned int cube_map_texture, skybox_VAO, skybox_VBO;
+        
         // Camera 
         Camera camera;
         float last_x;
