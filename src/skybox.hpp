@@ -26,7 +26,7 @@ class Skybox
 
         unsigned int cube_map_texture;
 
-        Shader* skybox_shader; 
+        Shader* skybox_shader_ptr; 
 
         unsigned int skybox_VAO, skybox_VBO;
 
