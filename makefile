@@ -8,10 +8,10 @@ CFLAGS := -lglfw -ldl -lnoise
 INCL := -I include/ -I include/glm 
 
 # add header files here 
-HDRS := src/window.hpp src/terrain.hpp
+HDRS := src/window.hpp src/terrain.hpp src/skybox.hpp 
 
 # add source files here
-SRCS := src/main.cpp src/window.cpp src/terrain.cpp src/glad.c 
+SRCS := src/main.cpp src/window.cpp src/terrain.cpp src/glad.c src/skybox.cpp
 
 # name of executable
 EXEC := TerrainGenerator.sh 
@@ -21,7 +21,7 @@ all: $(EXEC)
 
 # recipe for building the final executable
 $(EXEC): makefile 
-		$(CC) $(SRCS) -o $@ $(INCL) $(CFLAGS)
+		$(CC) -g $(SRCS) -o $@ $(INCL) $(CFLAGS)
 
 # clean workspace 
 clean:
