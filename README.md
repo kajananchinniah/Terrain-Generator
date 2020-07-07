@@ -45,6 +45,8 @@ After having all the prerequisites, Simply clone the repository and compile usin
 ## Details to Note 
 If you plan on using the skybox class or the terrain_manager class, first make sure to initialize opengl and then use it. To avoid initialization, use a pointer to the class and then initialization it when necessary. See window.cpp's init function for an example. 
 
+Currently stb_image.h is associated with the skybox class (see skybox.cpp). If you include it elsewhere, you might run into compiling issues. I likely won't do this yet, but in the future, creating an image class that uses stb_image.h would be a good idea. This way textures can be added to other resources when necessary. 
+
 ## Limitations 
 There are a few major limitations associated with my implementation. These are outlined here. 
 - With certain viewing distances, it's possible to see the terrain generate unrealistically (e.g. the terrain will generate instantly). This can be avoided by limiting the camera viewing distance to less than equal to the smallest grid size. 
