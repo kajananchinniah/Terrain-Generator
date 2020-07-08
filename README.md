@@ -55,6 +55,7 @@ There are a few major limitations associated with my implementation. These are o
 
 ## TODO
 - Clean up code (I hope to make a terrain manager class that deals with all the 9 terrains I generate)
+- Add a toon-like skybox and create a toon-like shader
 - Figure out why the lighting looks really bad 
 
 ## Acknowledgements / References 
@@ -65,3 +66,5 @@ For getting started with terrain generation, I consulted this great resource by 
 For creating my terrain generation algorithms, I consulted this resource: https://www.redblobgames.com/maps/terrain-from-noise . This contains basically everything you need to know about basic terrain generation from a high level. 
 
 For computing normals, I used these two resources: http://www.lighthouse3d.com/opengl/terrain/index.php?normals and https://gamedev.stackexchange.com/questions/174176/flat-shading-does-not-work-correctly-opengl . Note: I haven't used the latter yet, but plan on it once the project is in a more stable form.
+
+I used this tool to generate my skybox: https://github.com/wwwtyro/space-3d/
