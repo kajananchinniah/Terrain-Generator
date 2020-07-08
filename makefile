@@ -21,7 +21,7 @@ all: $(EXEC)
 
 # recipe for building the final executable
 $(EXEC): makefile 
-		$(CC) -g $(SRCS) -o $@ $(INCL) $(CFLAGS)
+		$(CC) $(SRCS) -o $@ $(INCL) $(CFLAGS)
 
 # clean workspace 
 clean:
