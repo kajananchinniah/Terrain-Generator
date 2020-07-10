@@ -18,17 +18,6 @@ Window::Window()
 
 int Window::init()
 {
-    // Initialize some parameters 
-    window_instance->camera = Camera(glm::vec3(0.0f, 1.0f, 0.0f));
-    window_instance->last_x = WINDOW_WIDTH / 2.0f;
-    window_instance->last_y = WINDOW_HEIGHT / 2.0f;
-    window_instance->first_mouse = true;
-    window_instance->delta_time = 0.0f;
-    window_instance->last_frame = 0.0f;
-    window_instance->camera_near = 0.1f;
-    window_instance->camera_far = std::min(30.0f, 30.0f);
-    
-
     // Initialize GLFW 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -57,8 +46,19 @@ int Window::init()
         return -1;
     }
 
+
     window_instance->skybox_ptr = skybox_ptr->getInstance();
     window_instance->terrain_manager_ptr = terrain_manager_ptr->getInstance();
+
+    // Initialize some parameters 
+    window_instance->camera = Camera(glm::vec3(0.0f, 1.0f, 0.0f));
+    window_instance->last_x = WINDOW_WIDTH / 2.0f;
+    window_instance->last_y = WINDOW_HEIGHT / 2.0f;
+    window_instance->first_mouse = true;
+    window_instance->delta_time = 0.0f;
+    window_instance->last_frame = 0.0f;
+    window_instance->camera_near = 0.1f;
+    window_instance->camera_far = std::min(window_instance->terrain_manager_ptr->getGridSizeX(), window_instance->terrain_manager_ptr->getGridSizeX());
 
     // Enable depth 
     glEnable(GL_DEPTH_TEST);

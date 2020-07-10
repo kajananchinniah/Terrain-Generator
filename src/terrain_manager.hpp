@@ -13,6 +13,8 @@ class TerrainManager
     public:
         static TerrainManager* getInstance();
         void draw(const glm::vec3&, const glm::mat4&, const glm::mat4&);
+        int getGridSizeX();
+        int getGridSizeZ();
 
     private:
         static TerrainManager *terrain_manager_instance;

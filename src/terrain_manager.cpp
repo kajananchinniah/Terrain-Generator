@@ -22,6 +22,16 @@ TerrainManager::TerrainManager()
 
 }
 
+int TerrainManager::getGridSizeX()
+{
+    return GRID_SIZE_X;
+}
+
+int TerrainManager::getGridSizeZ()
+{
+    return GRID_SIZE_Z;
+}
+
 void TerrainManager::draw(const glm::vec3 &camera_pos, const glm::mat4 &view, const glm::mat4 &projection)
 {
     terrain_shader_ptr->use();
