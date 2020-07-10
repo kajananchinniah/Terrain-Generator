@@ -21,5 +21,6 @@ int main()
         Window::getInstance()->render();
     }
 
+
     return 0;
 }

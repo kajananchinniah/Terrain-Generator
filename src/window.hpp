@@ -9,8 +9,8 @@
 
 #include "shader.h"
 #include "camera.h"
-#include "terrain.hpp"
 #include "skybox.hpp"
+#include "terrain_manager.hpp"
 
 #include <iostream>
 
@@ -20,31 +20,23 @@ class Window
         static Window* getInstance(); 
         int init();
         int shouldClose();
-        void setupRender(Terrain&, float, float, unsigned int&);
         void render();
 
-
     private:
-        static Window* instance;
+        static Window* window_instance;
         Window();
         GLFWwindow *window; 
+       
+        // Window constants 
         const unsigned int WINDOW_WIDTH = 800;
         const unsigned int WINDOW_HEIGHT = 600;
         const char* WINDOW_TITLE = "Terrain Generator";
 
-        Terrain terrains[9]; 
+
+        // Pointer to different objects
         Skybox *skybox_ptr;
+        TerrainManager *terrain_manager_ptr;
 
-        unsigned int VAOs[9], EBO;
-        unsigned int VBO[3]; // 0 - vertices, 1 - colours, 2 - normals 
-        std::vector<float> vertices;
-        std::vector<unsigned int> indices;
-        std::vector<float> normals;
-        std::vector<float> colours;
-
-        //Shader 
-        Shader *shader_ptr; 
-        
         // Camera 
         Camera camera;
         float last_x;

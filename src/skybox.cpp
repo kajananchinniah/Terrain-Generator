@@ -62,7 +62,7 @@ Skybox::Skybox()
     loadCubemap(); 
     setupRender();
 
-    skybox_shader_ptr = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
+    skybox_shader_ptr = new Shader(SKYBOX_VERTEX_SHADER, SKYBOX_FRAGMENT_SHADER);
     skybox_shader_ptr->use();
     skybox_shader_ptr->setInt("skybox", 0);
 }
@@ -120,10 +120,4 @@ void Skybox::draw(const glm::mat4 &view, const glm::mat4 &projection)
     glBindTexture(GL_TEXTURE_CUBE_MAP, cube_map_texture);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthFunc(GL_LESS);
-}
-
-void Skybox::done()
-{
-    glDeleteVertexArrays(1, &skybox_VAO);
-    glDeleteBuffers(1, &skybox_VAO);
 }

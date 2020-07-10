@@ -1,5 +1,11 @@
 #include "terrain.hpp"
 
+Terrain::Terrain(int x_size, int z_size)
+{
+    grid_size_x = x_size;
+    grid_size_z = z_size; 
+}
+
 void Terrain::generate(float x_pos, float z_pos)
 {
     vertices.clear();

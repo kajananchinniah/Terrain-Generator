@@ -18,7 +18,6 @@ class Skybox
     public:
         Skybox();
         void draw(const glm::mat4&, const glm::mat4&);
-        void done();
 
     private:
         void setupRender(); 
@@ -32,4 +31,7 @@ class Skybox
 
         std::vector<float> skybox_vertices;
         std::vector<std::string> skybox_faces; 
+
+        const char* SKYBOX_VERTEX_SHADER = "shaders/skybox.vs";
+        const char* SKYBOX_FRAGMENT_SHADER = "shaders/skybox.fs";
 };

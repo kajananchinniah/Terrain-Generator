@@ -10,18 +10,10 @@
 #include <iostream>
 #include <math.h>
 
-const float DEEP_WATER_LEVEL = 0.375;
-const float SHALLOW_WATER_LEVEL = 0.5;
-const float SHORE_LEVEL  = 0.53125;
-const float SAND_LEVEL = 0.5625;
-const float GRASS_LEVEL = 0.6875;
-const float DIRT_LEVEL = 0.81875;
-const float ROCK_LEVEL = 0.95;
-// Anything over dirt is just snow
-
 class Terrain
 {
     public:
+        Terrain(int, int);
         void generate(float, float);
         
         std::vector<float> getVertices();
@@ -49,8 +41,8 @@ class Terrain
         std::vector<float> normals;
 
         // Parameters related to grid size of terrain 
-        int grid_size_x = 30;
-        int grid_size_z = 30;
+        int grid_size_x;
+        int grid_size_z;
 
         // Parameters related to noise generation 
         noise::module::Perlin perlin;
@@ -63,5 +55,16 @@ class Terrain
         float octave_3 = 0.11f;
 
         float exponent = 7.00f; 
+
+        // Parameters related to what height corrosponds to what 
+        const float DEEP_WATER_LEVEL = 0.375;
+        const float SHALLOW_WATER_LEVEL = 0.5;
+        const float SHORE_LEVEL  = 0.53125;
+        const float SAND_LEVEL = 0.5625;
+        const float GRASS_LEVEL = 0.6875;
+        const float DIRT_LEVEL = 0.81875;
+        const float ROCK_LEVEL = 0.95;
+        // Anything over dirt is just snow
+
 };
 
