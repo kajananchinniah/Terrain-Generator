@@ -54,7 +54,6 @@ There are a few major limitations associated with my implementation. These are o
 - I regenerate each of the terrains each time, but some of the terrains within the 3x3 grid should be reusable. 
 
 ## TODO
-- Clean up code (I hope to make a terrain manager class that deals with all the 9 terrains I generate)
 - Add a toon-like skybox and create a toon-like shader
 - Figure out why the lighting looks really bad 
 
