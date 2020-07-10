@@ -1,5 +1,4 @@
 #pragma once
-
 #include <libnoise/noise.h>
 
 #include <glm/glm.hpp>

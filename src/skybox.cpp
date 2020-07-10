@@ -2,6 +2,17 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+Skybox* Skybox::skybox_instance = NULL;
+
+Skybox* Skybox::getInstance()
+{
+    if (!Skybox::skybox_instance)
+    {
+        Skybox::skybox_instance = new Skybox();
+    }
+    return Skybox::skybox_instance; 
+}
+
 Skybox::Skybox()
 {
     skybox_vertices =

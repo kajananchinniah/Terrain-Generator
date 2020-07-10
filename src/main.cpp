@@ -1,12 +1,4 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
-
-#include "camera.h"
-#include "shader.h"
-
 #include "window.hpp"
-#include "terrain.hpp"
 
 int main()
 {

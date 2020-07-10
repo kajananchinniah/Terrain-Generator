@@ -1,7 +1,4 @@
 #pragma once 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -11,15 +8,17 @@
 #include <vector>
 
 #include "shader.h"
-#include "camera.h"
 
 class Skybox
 {
     public:
-        Skybox();
+        static Skybox* getInstance();
         void draw(const glm::mat4&, const glm::mat4&);
 
     private:
+        static Skybox *skybox_instance;
+        Skybox();
+
         void setupRender(); 
         void loadCubemap(); 
 

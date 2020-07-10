@@ -57,7 +57,7 @@ int Window::init()
         return -1;
     }
 
-    window_instance->skybox_ptr = new Skybox();
+    window_instance->skybox_ptr = skybox_ptr->getInstance();
     window_instance->terrain_manager_ptr = terrain_manager_ptr->getInstance();
 
     // Enable depth 

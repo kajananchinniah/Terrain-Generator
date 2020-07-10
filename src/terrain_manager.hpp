@@ -1,14 +1,9 @@
 #pragma once 
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include "shader.h"
-#include "camera.h"
 #include "terrain.hpp"
 
 #include <iostream>
@@ -24,7 +19,6 @@ class TerrainManager
         TerrainManager();
 
         void setupRender(Terrain*, float, float, unsigned int&);
-        
 
         const static unsigned int GRID_SIZE_X = 30;
         const static unsigned int GRID_SIZE_Z = 30;

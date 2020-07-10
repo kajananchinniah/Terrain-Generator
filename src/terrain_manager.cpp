@@ -29,7 +29,7 @@ void TerrainManager::draw(const glm::vec3 &camera_pos, const glm::mat4 &view, co
     terrain_shader_ptr->setVec3("viewPos", camera_pos);
 
     // light properties 
-    terrain_shader_ptr->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+    terrain_shader_ptr->setVec3("light.ambient", 0.3f, 0.3f, 0.3f);
     terrain_shader_ptr->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
     terrain_shader_ptr->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
