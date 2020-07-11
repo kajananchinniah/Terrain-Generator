@@ -8,10 +8,10 @@ CFLAGS := -lglfw -ldl -lnoise
 INCL := -I include/ -I include/glm 
 
 # add header files here 
-HDRS := src/window.hpp src/terrain.hpp src/skybox.hpp 
+HDRS := src/window.hpp src/terrain.hpp src/skybox.hpp src/terrain_manager.hpp
 
 # add source files here
-SRCS := src/main.cpp src/window.cpp src/terrain.cpp src/glad.c src/skybox.cpp
+SRCS := src/main.cpp src/window.cpp src/terrain.cpp src/glad.c src/skybox.cpp src/terrain_manager.cpp
 
 # name of executable
 EXEC := TerrainGenerator.sh 
