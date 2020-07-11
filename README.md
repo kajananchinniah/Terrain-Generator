@@ -37,7 +37,7 @@ The final step is downloading `stb_image.h` from https://github.com/nothings/stb
 
 Now, you should be ready to compile this project. Note that I haven't tested this yet, since I have all the dependencies installed. 
 
-Also note: I include some libraries that I didn't write in the include (this is bad practice but I did it anyways. These will be removed once the project is more stablized). 
+In this repo, I include camera.h and shader.h in include. Note that I did not write these, and they were taken from learnopengl (https://learnopengl.com/). 
 
 ## Getting Started 
 After having all the prerequisites, Simply clone the repository and compile using: `make TerrainGenerator.sh`. Note: this has only been tested on Ubuntu 18.04. 
@@ -62,7 +62,7 @@ These are some features that I think would be nice to add eventually, but I won'
 - Generate realistic water rather than static water 
 
 ## Acknowledgements / References 
-To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my shaders are also heavily based on the examples found in this book. My implementation of the skybox class is basically all the skybox associated functions from here, but in a class. I also took the skybox shaders directly from here without modification.
+To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my terrain shaders are also heavily based on the examples found in this book with minor adjustments made to make them work for non-textured objects. My implementation of the skybox class is basically all the skybox associated functions from here, but in a class. I also took the skybox shaders directly from here without modification.
 
 For getting started with terrain generation, I consulted this great resource by Brackeys: https://www.youtube.com/watch?v=64NblGkAabk . In particular, this helped me with vertex and index generation. 
 
