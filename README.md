@@ -11,7 +11,7 @@ Here is an example using lighting:
 Note both gifs contain some strange artifacts for some reason.
 
 ## Prerequisites
-These instructions are specific towards Ubuntu. Specifically, they have been tested on Ubuntu 18.04. 
+These instructions are specific towards Ubuntu. Specifically, Ubuntu 18.04. Note they have not been tested yet.
 
 First clone the repo wherever you want. 
 
@@ -46,12 +46,12 @@ Now, you will need glm. Simply download the header files found here: https://glm
 
 The final step is downloading `stb_image.h` from https://github.com/nothings/stb/blob/master/stb_image.h and placing it in `include` of this project.
 
-Now, you should be ready to compile this project. Note that I haven't tested this yet, since I have all the dependencies installed. 
-
-In this repo, I include camera.h and shader.h in include. Note that I did not write these, and they were taken from learnopengl (https://learnopengl.com/). 
+In this repo, I include camera.h and shader.h in include. Note that I did not write these, and they were taken from learnopengl (https://learnopengl.com/). The camera.h is slightly modified to allow for moving directly up and down.
 
 ## Getting Started 
 After having all the prerequisites, compile using: `make TerrainGenerator.sh`. You can remove the file afterwards manually or use `make clean` to cleanup your workspace. Since only one file is generated, either approach is fine. 
+
+In terms of controls, the standard wasd is used to move. Using those keys, you will move in the direction the camera is facing. q is used to go up and e is to go down in the y-direction only.
 
 Note: this has only been tested on Ubuntu 18.04. 
 
