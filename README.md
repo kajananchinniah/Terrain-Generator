@@ -1,6 +1,11 @@
 # Terrain-Generator 
 This is a terrain generator implemented in C++ using OpenGL. Perlin noise (via libnoise) is used to generate the heighmaps. I chose perlin noise because it's a common method of height map generation, and produces coherent noise dependent on position only. In order to emulate infinite terrain, a 3x3 grid is created around the player that updates in real time.  
 
+## Screenshots / Videos 
+Note: this gif contains an example where lighting is disabled. The version commit to the repo uses lighting (but it doesn't work well)
+![](resources/Sample_Video.gif)
+
+
 ## Prerequisites
 These instructions are specific towards Ubuntu. Specifically, they have been tested on Ubuntu 18.04. 
 
