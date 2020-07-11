@@ -165,32 +165,29 @@ void Terrain::generateIndices()
 
 void Terrain::generateLightingNormals()
 {
-    // TODO: clean this area; it's written messy 
-    for (int i = 0; i < indices.size(); i+=3)
+    for (int z = 0; z <= grid_size_z; z++)
     {
-        // Get the indices associated with a triangles
-        unsigned int idx_1 = indices[i];
-        unsigned int idx_2 = indices[i+1];
-        unsigned int idx_3 = indices[i+2];
-   
-        // Get the vertices associated with the indices 
-        // Multiply by 3 because each vertex has 3 points associated to it 
-        unsigned int vertex_pos = 3 * idx_1;
-        glm::vec3 t1 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-   
-        vertex_pos = 3 * idx_2;
-        glm::vec3 t2 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-   
-        vertex_pos = 3 * idx_3;
-        glm::vec3 t3 = glm::vec3(vertices[vertex_pos], vertices[vertex_pos + 1], vertices[vertex_pos + 2]);
-   
-        glm::vec3 v1 = t2 - t1;
-        glm::vec3 v2 = t3 - t1;
-   
-        glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
-   
-        normals.push_back(normal.x);
-        normals.push_back(normal.y);
-        normals.push_back(normal.z);
+        for (int x = 0; x <= grid_size_x; x++)
+        {
+             // Add 1 to all idx offset to the y coordinate (height)
+             // Multiply by 3 to factor in the fact that vector goes {x1, y1, z1, x2, y2, z2} 
+             int idx = 3 * (x - 1) + 3 * z * grid_size_x + 1;
+             float hL = vertices[idx];
+
+             idx = 3 * (x + 1) + 3 * z * grid_size_x + 1;
+             float hR = vertices[idx];
+
+             idx = 3 * x + 3 * (z - 1) * grid_size_x + 1;
+             float hD = vertices[idx];
+
+             idx = 3 * x + 3 * (z + 1) * grid_size_x + 1;
+             float hU = vertices[idx];
+
+             glm::vec3 normal = glm::vec3((hL - hR), -2.0f, (hD - hU));
+             normal = glm::normalize(normal);
+             normals.push_back(normal.x);
+             normals.push_back(normal.y);
+             normals.push_back(normal.z);
+        }
     }
 }
