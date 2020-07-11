@@ -9,7 +9,9 @@ Note: this gif contains an example where lighting is disabled. The version commi
 ## Prerequisites
 These instructions are specific towards Ubuntu. Specifically, they have been tested on Ubuntu 18.04. 
 
-First, install openGL. This can be done using the following command (I think, it's been a while).
+First clone the repo wherever you want. 
+
+Now, install openGL. This can be done using the following command (I think, it's been a while).
 ```
 sudo apt-get install mesa-utils
 ```
@@ -45,7 +47,9 @@ Now, you should be ready to compile this project. Note that I haven't tested thi
 In this repo, I include camera.h and shader.h in include. Note that I did not write these, and they were taken from learnopengl (https://learnopengl.com/). 
 
 ## Getting Started 
-After having all the prerequisites, Simply clone the repository and compile using: `make TerrainGenerator.sh`. Note: this has only been tested on Ubuntu 18.04. 
+After having all the prerequisites, compile using: `make TerrainGenerator.sh`. You can remove the file afterwards manually or use `make clean` to cleanup your workspace. Since only one file is generated, either approach is fine. 
+
+Note: this has only been tested on Ubuntu 18.04. 
 
 ## Details to Note 
 If you plan on using the skybox class or the terrain_manager class, first make sure to initialize opengl and then use it. To avoid initialization, use a pointer to the class and then initialization it when necessary. See window.cpp's init function for an example. 
