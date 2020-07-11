@@ -1,5 +1,5 @@
 # Terrain-Generator 
-This is a terrain generator implemented in C++ using OpenGL. Perlin noise (via libnoise) is used to generate the heighmaps. I chose perlin noise because it's a common method of height map generation, and produces coherent noise dependent on position only. In order to emulate infinite terrain, a 3x3 grid is created around the player that updates in real time. 
+This is a terrain generator implemented in C++ using OpenGL. Perlin noise (via libnoise) is used to generate the heighmaps. I chose perlin noise because it's a common method of height map generation, and produces coherent noise dependent on position only. In order to emulate infinite terrain, a 3x3 grid is created around the player that updates in real time.  
 
 ## Prerequisites
 These instructions are specific towards Ubuntu. Specifically, they have been tested on Ubuntu 18.04. 
@@ -54,8 +54,12 @@ There are a few major limitations associated with my implementation. These are o
 - I regenerate each of the terrains each time, but some of the terrains within the 3x3 grid should be reusable. 
 
 ## TODO
-- Add a toon-like skybox and create a toon-like shader
 - Figure out why the lighting looks really bad 
+
+## Potential Plans in the Near Future
+These are some features that I think would be nice to add eventually, but I won't be doing this in the short term at least. 
+- Add a toon like shading or use textures to make the terrains look more life like 
+- Generate realistic water rather than static water 
 
 ## Acknowledgements / References 
 To learn OpenGL, I used this resource: https://learnopengl.com/. I also took the camera.h, shader.h and some Window methods (processInput, framebuffer_size_callback, mouse_callback). My implementation for my shaders are also heavily based on the examples found in this book. My implementation of the skybox class is basically all the skybox associated functions from here, but in a class. I also took the skybox shaders directly from here without modification.
@@ -64,6 +68,6 @@ For getting started with terrain generation, I consulted this great resource by 
 
 For creating my terrain generation algorithms, I consulted this resource: https://www.redblobgames.com/maps/terrain-from-noise . This contains basically everything you need to know about basic terrain generation from a high level. 
 
-For computing normals, I used these two resources: http://www.lighthouse3d.com/opengl/terrain/index.php?normals and https://gamedev.stackexchange.com/questions/174176/flat-shading-does-not-work-correctly-opengl . Note: I haven't used the latter yet, but plan on it once the project is in a more stable form.
+For computing normals, I used this resource: http://www.lighthouse3d.com/opengl/terrain/index.php?normals 
 
 I used this tool to generate my skybox: https://github.com/wwwtyro/space-3d/
