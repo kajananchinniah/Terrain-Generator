@@ -49,6 +49,9 @@ class Window
         float delta_time;
         float last_frame;
 
+        double last_time;
+        int nbFrames;
+
         // Process Input 
         void processInput(GLFWwindow *window);
 

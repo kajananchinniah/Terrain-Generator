@@ -59,6 +59,8 @@ int Window::init()
     window_instance->last_frame = 0.0f;
     window_instance->camera_near = 0.1f;
     window_instance->camera_far = std::min(window_instance->terrain_manager_ptr->getGridSizeX(), window_instance->terrain_manager_ptr->getGridSizeX());
+    window_instance->last_time = glfwGetTime();
+    window_instance->nbFrames = 0;
 
     // Enable depth 
     glEnable(GL_DEPTH_TEST);
@@ -92,6 +94,16 @@ void Window::render()
 
     terrain_manager_ptr->draw(camera.Position, view, projection);
     skybox_ptr->draw(view, projection);
+
+    double current_time = glfwGetTime();
+    nbFrames++;
+    if (current_time - last_time >= 1.0)
+    {
+        std::cout << 1000.0/double(nbFrames) << "ms/frame\n";
+        nbFrames = 0;
+        last_time += 1.0;
+    }
+
     glfwSwapBuffers(window);
     glfwPollEvents();
 }

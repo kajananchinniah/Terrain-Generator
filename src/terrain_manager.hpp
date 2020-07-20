@@ -22,8 +22,8 @@ class TerrainManager
 
         void setupRender(Terrain*, float, float, unsigned int&);
 
-        const static unsigned int GRID_SIZE_X = 30;
-        const static unsigned int GRID_SIZE_Z = 30;
+        const static unsigned int GRID_SIZE_X = 20;
+        const static unsigned int GRID_SIZE_Z = 20;
 
         // DO NOT MODIFY THESE 3 PARAMETERS 
         const static unsigned int NUM_TERRAINS = 9;
