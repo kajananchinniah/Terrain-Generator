@@ -8,11 +8,6 @@
 
 #include <iostream>
 
-// DO NOT MODIFY THESE 3 PARAMETERS 
-const static unsigned int NUM_TERRAINS = 9;
-const static unsigned int NUM_TERRAINS_SQRT = 3;
-const static unsigned int NUM_VBO_MODES = 3;
-
 class TerrainManager
 {
     public:
@@ -30,6 +25,12 @@ class TerrainManager
 
         void setupRender(Terrain*, unsigned int&, unsigned int*, unsigned int&);
         void updateBuffer(Terrain*, float, float, unsigned int*, unsigned int&);
+        
+        // DO NOT MODIFY THESE 3 PARAMETERS 
+        const static unsigned int NUM_TERRAINS = 9;
+        const static unsigned int NUM_TERRAINS_SQRT = 3;
+        const static unsigned int NUM_VBO_MODES = 3;
+
 
         Terrain *terrains[NUM_TERRAINS];
         unsigned int terrain_VAOs[NUM_TERRAINS], terrain_VBOs[NUM_TERRAINS][NUM_VBO_MODES], EBOs[NUM_TERRAINS];
