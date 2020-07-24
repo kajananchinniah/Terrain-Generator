@@ -67,6 +67,7 @@ There are a few major limitations associated with my implementation. These are o
 - With certain viewing distances, it's possible to see the terrain generate unrealistically (e.g. the terrain will generate instantly). This can be avoided by limiting the camera viewing distance to less than equal to the smallest grid size. 
 - I just clear the vectors but since the vectors are reused and should be a fixed size (for a given grid size), I could just reuse them as fixed arrays instead of vectors. Vectors were easier to work with so that's why I went with it.
 - I regenerate each of the terrains each time, but some of the terrains within the 3x3 grid should be reusable. 
+- No instance culling & LOD optimizations. Basically, chunks that don't need to be rendered are being rendered at the same detail as close objects.
 
 ## TODO
 - Figure out why the lighting looks bad 
