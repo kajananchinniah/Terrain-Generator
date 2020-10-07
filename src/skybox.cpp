@@ -1,3 +1,5 @@
+// Modified code from https://learnopengl.com/ for use in a class
+
 #include "skybox.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
