@@ -1,3 +1,4 @@
+// processInput, framebuffer_size_callback, mouse_callback from https://learnopengl.com/ 
 #include "window.hpp"
 
 Window* Window::window_instance = NULL;
