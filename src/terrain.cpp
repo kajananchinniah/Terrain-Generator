@@ -183,7 +183,7 @@ void Terrain::generateLightingNormals()
              idx = 3 * x + 3 * (z + 1) * grid_size_x + 1;
              float hU = vertices[idx];
 
-             glm::vec3 normal = glm::vec3((hL - hR), -2.0f, (hD - hU));
+             glm::vec3 normal = glm::vec3((hL - hR), 2.0f*grid_size_x*grid_size_z, (hD - hU));
              normal = glm::normalize(normal);
              normals.push_back(normal.x);
              normals.push_back(normal.y);

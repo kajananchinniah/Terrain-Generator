@@ -4,10 +4,10 @@ This is a terrain generator implemented in C++ using OpenGL. Perlin noise (via l
 In insights, the number of additions / deletions look insanely high because libraries were commit by accident.
 
 ## Screenshots / Videos 
-Note: this gif contains an example where lighting is disabled. The version commit to the repo uses lighting (but it doesn't work well)
+Note: this gif contains an example where lighting is disabled. The version commit to the repo uses lighting
 ![](resources/Sample_Video.gif)
 
-Here is an example using lighting:
+Here is an example using lighting (prior to fixing it):
 ![](resources/Sample_Video_Lighting.gif)
 
 Note both gifs contain some strange artifacts for some reason.
@@ -69,9 +69,6 @@ There are a few major limitations associated with my implementation. These are o
 - I regenerate each of the terrains each time, but some of the terrains within the 3x3 grid should be reusable. 
 - No instance culling & LOD optimizations. Basically, chunks that don't need to be rendered are being rendered at the same detail as close objects.
 
-## TODO
-- Figure out why the lighting looks bad 
-
 ## Potential Plans in the Near Future
 These are some features that I think would be nice to add eventually, but I won't be doing this in the short term at least. 
 - Add a toon like shading or use textures to make the terrains look more life like 
@@ -86,5 +83,6 @@ For getting started with terrain generation, I consulted this great resource by 
 For creating my terrain generation algorithms, I consulted this resource: https://www.redblobgames.com/maps/terrain-from-noise . This contains basically everything you need to know about basic terrain generation from a high level. 
 
 For computing normals, I used this resource: https://stackoverflow.com/questions/13983189/opengl-how-to-calculate-normals-in-a-terrain-height-grid 
+I used this resource as well: https://community.khronos.org/t/lighting-terrain-issue-diffuse-and-spec-because-of-normals/105510/5 (this helped fix lighting issues)
 
 I used this tool to generate my skybox: https://github.com/wwwtyro/space-3d/
