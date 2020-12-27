@@ -66,8 +66,6 @@ int Window::init()
     // Enable depth 
     glEnable(GL_DEPTH_TEST);
 
-    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
     return 0;
 }
 
